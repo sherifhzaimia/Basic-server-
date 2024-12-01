@@ -18,8 +18,8 @@ const toolsConfig = {
         loginButtonSelector: 'button[type="submit"]',
         sessionCookieName: "ASP.NET_SessionId",
         credentials: {
-        username: 'dihannill1@wireconnected.com ', // البريد الإلكتروني
-        password: '2$@2hhGhbKzSqfK' // كلمة المرور
+        username: 'dihannill1@wireconnected.com',
+        password: '2$@2hhGhbKzSqfK'
         },
       },
       Peeksta: {
@@ -58,4 +58,3 @@ const toolsConfig = {
   };
   
   module.exports = toolsConfig;
-  

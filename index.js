@@ -42,17 +42,37 @@ async function loginAndSaveSession(toolName) {
     return { success: false, error: "الأداة غير موجودة في التكوين" };
   }
 
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
+      '--window-size=1920x1080',
+    ],
+    ignoreHTTPSErrors: true
+  });
   const page = await browser.newPage();
 
   try {
-    await page.goto(tool.baseUrl, { waitUntil: "networkidle2" });
+    await page.setDefaultNavigationTimeout(30000);
+    await page.goto(tool.baseUrl, { 
+      waitUntil: "networkidle2",
+      timeout: 30000 
+    });
+    
+    // انتظار ظهور حقول الإدخال
+    await page.waitForSelector(tool.usernameSelector);
+    await page.waitForSelector(tool.passwordSelector);
+    
     await page.type(tool.usernameSelector, tool.credentials.username);
     await page.type(tool.passwordSelector, tool.credentials.password);
 
     await Promise.all([
       page.click(tool.loginButtonSelector),
-      page.waitForNavigation({ waitUntil: "networkidle2" }),
+      page.waitForNavigation({ waitUntil: "networkidle2", timeout: 30000 }),
     ]);
 
     const cookies = await page.cookies();
