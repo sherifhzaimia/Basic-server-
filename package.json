@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.3",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-rate-limit": "^7.1.5",
     "mongoose": "^8.8.3",
     "puppeteer": "^23.9.0",
     "puppeteer-extra": "^3.3.6",
@@ -24,5 +26,5 @@
   "engines": {
     "node": "18.x"
   },
-  "description": ""
+  "description": "Server-side application for managing web tool authentication sessions"
 }
